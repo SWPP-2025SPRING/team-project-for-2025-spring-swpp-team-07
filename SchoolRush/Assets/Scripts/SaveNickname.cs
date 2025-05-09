@@ -20,4 +20,6 @@ public class SaveNickname : MonoBehaviour {
         string nickname = nicknameInputField.text;
         PlayerPrefs.SetString(NICKNAME_KEY, nickname);
         PlayerPrefs.Save();
+    }
+
 }
