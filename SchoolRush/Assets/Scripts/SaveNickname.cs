@@ -15,11 +15,9 @@ public class SaveNickname : MonoBehaviour {
         }
     }
 
-
     public void SaveNicknameClick() {
         string nickname = nicknameInputField.text;
         PlayerPrefs.SetString(NICKNAME_KEY, nickname);
         PlayerPrefs.Save();
     }
-
 }

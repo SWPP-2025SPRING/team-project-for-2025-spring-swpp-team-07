@@ -271,10 +271,4 @@ public class KartController : MonoBehaviour
     {
         postProfile.GetSetting<ChromaticAberration>().intensity.value = x;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawLine(transform.position + transform.up, transform.position - (transform.up * 2));
-    //}
 }
