@@ -2,3 +2,4 @@
 .vscode
 .vsconfig
 *.local
+node_modules
