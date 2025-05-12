@@ -281,7 +281,7 @@ public class KartController : MonoBehaviour
     {
         while (true)
         {
-            playerData.Insert(0, transform.position);
+            playerData.Insert(transform.position);
             yield return new WaitForSeconds(1f);
         }
     }

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 public class EndGameController : MonoBehaviour
 {
     public GameObject endGameUI;
@@ -40,6 +39,6 @@ public class EndGameController : MonoBehaviour
 
         KartController kartController = FindObjectOfType<KartController>();
         PlayerData playerData = kartController.GetPlayerData();
-        PlayerDataSaveLoad.SaveData(playerData);
+        playerData.Save((int)(hud.GetElapsedTime() * 1000));
     }
 }
