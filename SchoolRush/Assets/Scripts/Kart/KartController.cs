@@ -30,9 +30,9 @@ public class KartController : MonoBehaviour
 
     [Header("Parameters")]
 
-    public float acceleration = 30f;
-    public float steering = 80f;
-    public float gravity = 10f;
+    public float acceleration = 65f;
+    public float steering = 10f;
+    public float gravity = 25f;
     public LayerMask layerMask;
 
     [Header("Model Parts")]
@@ -145,7 +145,7 @@ public class KartController : MonoBehaviour
         backWheels.localEulerAngles += new Vector3(0, 0, sphere.velocity.magnitude/2);
 
         //c) Steering Wheel
-        steeringWheel.localEulerAngles = new Vector3(-25, 90, ((Input.GetAxis("Horizontal") * 45)));
+        steeringWheel.localEulerAngles = new Vector3(0, ((Input.GetAxis("Horizontal") * 45)), 77.4f);
 
     }
 
