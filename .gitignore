@@ -3,3 +3,4 @@
 .vsconfig
 *.local
 node_modules
+*.alf

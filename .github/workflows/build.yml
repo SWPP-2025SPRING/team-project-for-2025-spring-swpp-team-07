@@ -1,0 +1,52 @@
+name: Build and Upload Unity Game
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    name: Build Unity Project
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache Unity
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ runner.os == 'Windows' && 'C:\\Users\\runneradmin\\AppData\\Local\\UnityEditor\\CacheServer' || '~/Library/Unity/CacheServer' }}
+          key: ${{ runner.os }}-unity-cache
+
+      - name: Install Unity
+        uses: game-ci/unity-installer@v2
+        with:
+          unityVersion: 2021.3.45f1
+          targetPlatform: ${{ matrix.os == 'macos-latest' && 'macOS' || 'Windows' }}
+
+      - name: Activate Unity License
+        run: |
+          mkdir -p ~/.local/share/unity3d/Unity
+          echo "${{ secrets.UNITY_ULF }}" | base64 --decode > ~/.local/share/unity3d/Unity/Unity_lic.ulf
+
+      - name: Build Unity Project
+        run: |
+          mkdir -p Build
+          /Applications/Unity/Hub/Editor/2021.3.0f1/Unity.app/Contents/MacOS/Unity \
+            -batchmode -nographics -quit \
+            -projectPath . \
+            -buildTarget ${{ matrix.os == 'macos-latest' && 'macOS' || 'Win64' }} \
+            -customBuildPath Build/${{ matrix.os == 'macos-latest' && 'macOSBuild' || 'WindowsBuild' }} \
+            -logFile Build/build.log
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os == 'macos-latest' && 'macOSBuild' || 'WindowsBuild' }}
+          path: Build/${{ matrix.os == 'macos-latest' && 'macOSBuild' || 'WindowsBuild' }}
