@@ -53,7 +53,7 @@ public class UpgradeManager : MonoBehaviour
             new Upgrade("Acceleration Increase", "Acceleration increased by 30%", AccelerationIncrease),
             new Upgrade("No Passengers", "No Passengers", NoPassengers),
             new Upgrade("Traffic Num Decrease", "Traffic Num Decrease", TrafficNumDecrease),
-            new Upgrade("Exempet From Collision", "Exempet From Collision", ExempetFromCollision),
+            new Upgrade("Exempt From Collision", "Exempt From Collision", ExemptFromCollision),
         };
     }
 
@@ -92,6 +92,16 @@ public class UpgradeManager : MonoBehaviour
     {
         upgradeUI.SetActive(false);
         Time.timeScale = 1;
+        ResetButtonEvents();
+    }
+
+    private void ResetButtonEvents()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            upgradeUIItems[i].transform.GetChild(2).gameObject
+                .GetComponent<Button>().onClick.RemoveAllListeners();
+        }
     }
 
 
@@ -112,12 +122,12 @@ public class UpgradeManager : MonoBehaviour
 
     void TrafficNumDecrease()
     {
-        Debug.Log("TrafficNumDecrease");
+        Debug.Log("Traffic Num Decrease");
     }
 
-    void ExempetFromCollision()
+    void ExemptFromCollision()
     {
-        Debug.Log("ExempetFromCollision");
+        Debug.Log("Exempt From Collision");
     }
 
 }
