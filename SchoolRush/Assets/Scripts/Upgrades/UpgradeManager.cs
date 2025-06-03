@@ -7,127 +7,84 @@ using TMPro;
 
 public class UpgradeManager : MonoBehaviour
 {
-    class Upgrade
-    {
-        public string title;
-        public string description;
-        public UnityAction action;
-
-        public Upgrade(string title, string description, UnityAction action)
-        {
-            this.title = title;
-            this.description = description;
-            this.action = action;
-        }
-    }
+    public KartController kartController;
 
     [SerializeField]
     private GameObject upgradeUI;
     private List<GameObject> upgradeUIItems;
 
-    // Todo: Replace below 5 lines with "private List<List<Upgrade>> upgrades";
+    private List<Upgrade> selectedUpgrades;
 
-    private List<Upgrade> upgrades1;
-    private List<Upgrade> upgrades2;
-    private List<Upgrade> upgrades3;
-    private List<Upgrade> upgrades4;
-    private List<Upgrade> upgrades5;
-
-    private void Start()
-    {
-        Init();
-    }
-
-    private void Init()
-    {
+    private void Start() {
         upgradeUIItems = new List<GameObject>();
+        selectedUpgrades = new List<Upgrade>();
 
         for (int i = 0; i < 3; i++)
-        {
             upgradeUIItems.Add(upgradeUI.transform.GetChild(i).gameObject);
-        }
-
-        upgrades1 = new List<Upgrade>
-        {
-            new Upgrade("Max Speed Increase", "Max speed increased by 30%", MaxSpeedIncrease),
-            new Upgrade("Acceleration Increase", "Acceleration increased by 30%", AccelerationIncrease),
-            new Upgrade("No Passengers", "No Passengers", NoPassengers),
-            new Upgrade("Traffic Num Decrease", "Traffic Num Decrease", TrafficNumDecrease),
-            new Upgrade("Exempt From Collision", "Exempt From Collision", ExemptFromCollision),
-        };
     }
 
-    public void PickUpgrade(int checkpoint)
-    {
+    public void PickUpgrade(int checkpoint) {
         upgradeUI.SetActive(true);
         Time.timeScale = 0;
+        List<Upgrade> upgrades = new List<Upgrade>(); // should be length 3
 
-        if (checkpoint == 1)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                int index = Random.Range(0, upgrades1.Count);
-
-                AddUpgrade2UI(upgradeUIItems[i], upgrades1[index]);
-
-                upgrades1.Remove(upgrades1[index]);
-            }
+        switch (checkpoint) {
+            case 1:
+                Upgrade u101 = new Upgrade101(kartController);
+                Upgrade u102 = new Upgrade102();
+                Upgrade u103 = new Upgrade103();
+                Upgrade u104 = new Upgrade104();
+                Upgrade u105 = new Upgrade105();
+                upgrades.Add(u101);
+                upgrades.Add(u102);
+                upgrades.AddRange(GetRandom(new List<Upgrade> { u103, u104, u105 }, 1));
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
         }
 
+        foreach (var upgrade in upgrades) {
+            int index = upgrades.IndexOf(upgrade);
+            upgradeUIItems[index].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = upgrade.GetTitle();
+            upgradeUIItems[index].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = upgrade.GetDescription();
+            upgradeUIItems[index].transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => PickComplete(upgrade));
+            upgradeUIItems[index].SetActive(true);
+        }
     }
 
-
-    // 1st child: Title
-    // 2nd child: Description
-    // 3rd child: button, take effect on click
-    private void AddUpgrade2UI(GameObject ui, Upgrade upgrade)
-    {
-        ui.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = upgrade.title;
-        ui.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = upgrade.description;
-        ui.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(upgrade.action);
-        ui.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(PickComplete);
-    }
-
-    private void PickComplete()
+    private void PickComplete(Upgrade upgrade)
     {
         upgradeUI.SetActive(false);
+        upgrade.OnPick();
         Time.timeScale = 1;
-        ResetButtonEvents();
+        selectedUpgrades.Add(upgrade);
+
+        foreach (var item in upgradeUIItems)
+            item.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
-    private void ResetButtonEvents()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            upgradeUIItems[i].transform.GetChild(2).gameObject
-                .GetComponent<Button>().onClick.RemoveAllListeners();
-        }
+    private List<Upgrade> GetRandom(List<Upgrade> upgrades, int count) {
+      List<Upgrade> upgradeList = new List<Upgrade>(upgrades);
+      List<Upgrade> selectedUpgrades = new List<Upgrade>();
+
+      System.Random random = new System.Random();
+
+      int remainingCount = Mathf.Min(count, upgradeList.Count);
+
+      while (remainingCount > 0 && upgradeList.Count > 0)
+      {
+          int randomIndex = random.Next(0, upgradeList.Count);
+          selectedUpgrades.Add(upgradeList[randomIndex]);
+          upgradeList.RemoveAt(randomIndex);
+          remainingCount--;
+      }
+
+      return selectedUpgrades;
     }
-
-
-    void MaxSpeedIncrease()
-    {
-        Debug.Log("Max speed increased by 30%");
-    }
-
-    void AccelerationIncrease()
-    {
-        Debug.Log("Acceleration increased by 30%");
-    }
-
-    void NoPassengers()
-    {
-        Debug.Log("No Passengers");
-    }
-
-    void TrafficNumDecrease()
-    {
-        Debug.Log("Traffic Num Decrease");
-    }
-
-    void ExemptFromCollision()
-    {
-        Debug.Log("Exempt From Collision");
-    }
-
 }
