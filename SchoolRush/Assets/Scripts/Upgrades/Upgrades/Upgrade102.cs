@@ -1,9 +1,19 @@
 public class Upgrade102 : Upgrade {
-    public Upgrade102(): base("가속도 증가", GetDescription()) {
+    private KartController kartController;
+    private readonly static float rate = 1.3f;
 
+    public Upgrade102(KartController kartController) : base("가속도 증가", GetDescription(kartController)) {
+        this.kartController = kartController;
     }
 
-    private static string GetDescription() {
-        return "가속도가\n30% 증가합니다.";
+    private static string GetDescription(KartController kartController)
+    {
+        float acc = kartController.GetAcceleration();
+        return $"가속도가\n30% 증가합니다.\n\n{acc} -> {acc * rate}";
+    }
+
+    public override void OnPick()
+    {
+        kartController.SetAcceleration(kartController.GetAcceleration() * rate);
     }
 }

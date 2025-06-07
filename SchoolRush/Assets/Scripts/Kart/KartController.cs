@@ -34,8 +34,10 @@ public class KartController : MonoBehaviour
 
     [Header("Parameters")]
 
+    //These parameters are recommended to be private, or use properties (getter & setter) 
     public float acceleration = 30f;
     public float boostDuration = 0.3f;
+    private float boostEnergyPct = 0f;
     public float steering = 10f;
     public float gravity = 25f;
     public LayerMask layerMask;
@@ -50,6 +52,17 @@ public class KartController : MonoBehaviour
     public Transform wheelParticles;
     public Transform flashParticles;
     public Color[] turboColors;
+
+    //Upgrade Effects
+    private bool canJump = false;
+    private float jumpCoolDownTime = 5f;
+    private float jumpForce = 1500f;
+
+    private bool moreDizzy = false;
+    private float dizzyTime = 2f;
+
+    private bool canBoostAutoRecover = false;
+    private float boostRecoverPct = 20f;
 
     void Start()
     {
@@ -127,6 +140,15 @@ public class KartController : MonoBehaviour
         if (Input.GetButtonUp("Jump") && drifting)
         {
             Boost();
+        }
+
+        //Jump
+
+        if (canJump && Input.GetKeyDown(KeyCode.Space)) 
+        {
+            sphere.AddForce(jumpForce * Vector3.up, ForceMode.Acceleration);
+
+            JumpCoolDown();
         }
 
         currentRotate = Mathf.Lerp(currentRotate, rotate, Time.deltaTime * 4f);
@@ -290,7 +312,7 @@ public class KartController : MonoBehaviour
 
     public PlayerData GetPlayerData()
     {
-        return this.playerData;
+        return playerData;
     }
 
     public float GetMaxSpeed() {
@@ -316,9 +338,74 @@ public class KartController : MonoBehaviour
     public int GetRemainingShields() {
         return shieldCount;
     }
+
+    public float GetAcceleration()
+    {
+        return acceleration;
+    }
+
+    public void SetAcceleration(float x)
+    {
+        if (x <= 0)
+        {
+            Debug.LogError("Acceleration cannot be negative!");
+            return;
+        }
+        acceleration = x;
+    }
+
+    public float GetBoostDuration()
+    {
+        return boostDuration;
+    }
+
+    public void SetBoostDuration(float x)
+    {
+        boostDuration = x;
+    }
+
+    public void EnableJump()
+    {
+        canJump = true;
+    }
+
+    public void EnableMoreDizzy()
+    {
+        moreDizzy = true;
+    }
+
+    public void EnableBoostAutoRecover()
+    {
+        canBoostAutoRecover = true;
+
+        StartCoroutine(nameof(BoostAutoRecover));
+    }
+
+    private void JumpCoolDown()
+    {
+        canJump = false;
+        Invoke(nameof(JumpCoolDown_), jumpCoolDownTime);
+    }
+
+    private void JumpCoolDown_()
+    {
+        canJump = true;
+    }
+
+    private IEnumerator BoostAutoRecover() 
+    {
+        while (canBoostAutoRecover)
+        {
+            boostEnergyPct += boostRecoverPct;
+
+            boostEnergyPct = Mathf.Min(boostEnergyPct, 100f);
+
+            yield return new WaitForSeconds(1);
+        }
+    }
 }
 
 public enum ShieldResult {
-  Succeed,
-  Failed
+    Succeed,
+    Failed
 }

@@ -6,4 +6,9 @@ public class Upgrade404 : Upgrade {
     private static string GetDescription() {
         return "주변 차량이 등장하지 않습니다.";
     }
+
+    public override void OnPick()
+    {
+        GameController.Instance.IsNoTraffic = true;
+    }
 }

@@ -31,19 +31,32 @@ public class UpgradeManager : MonoBehaviour
         switch (checkpoint) {
             case 1:
                 Upgrade u101 = new Upgrade101(kartController);
-                Upgrade u102 = new Upgrade102();
+                Upgrade u102 = new Upgrade102(kartController);
                 Upgrade u103 = new Upgrade103();
                 Upgrade u104 = new Upgrade104();
                 Upgrade u105 = new Upgrade105(kartController);
-                upgrades.Add(u101);
-                upgrades.Add(u102);
-                upgrades.AddRange(GetRandom(new List<Upgrade> { u105 }, 1));
+                upgrades.AddRange(GetRandom(new List<Upgrade> { u101, u102, u103, u104, u105 }, 3));
                 break;
             case 2:
+                Upgrade u201 = new Upgrade201(kartController);
+                Upgrade u202 = new Upgrade202(kartController);
+                Upgrade u203 = new Upgrade203(kartController);
+                Upgrade u204 = new Upgrade204();
+                Upgrade u205 = new Upgrade205(kartController);
+                upgrades.AddRange(GetRandom(new List<Upgrade> { u201, u202, u203, u204, u205 }, 3));
                 break;
             case 3:
+                Upgrade u301 = new Upgrade301(kartController);
+                Upgrade u302 = new Upgrade302(kartController);
+                Upgrade u303 = new Upgrade303(kartController);
+                upgrades.AddRange(GetRandom(new List<Upgrade> { u301, u302, u303 }, 3));
                 break;
             case 4:
+                Upgrade u401 = new Upgrade401(kartController);
+                Upgrade u402 = new Upgrade402();
+                Upgrade u403 = new Upgrade403(kartController);
+                Upgrade u404 = new Upgrade404();
+                upgrades.AddRange(GetRandom(new List<Upgrade> { u401, u402, u403, u404 }, 3));
                 break;
             case 5:
                 break;
