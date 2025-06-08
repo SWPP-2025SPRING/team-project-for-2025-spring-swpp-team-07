@@ -136,4 +136,5 @@ TBD
 
 ## 테스팅
 
-TBD
+- RandomPicker.cs 에 대한 단위 테스트를 구현했습니다. TBD
+- C#은 아니지만, burndown chart 를 구현할 때 [https://github.com/SWPP-2025SPRING/team-project-for-2025-spring-swpp-team-07/blob/c47fef22b7ec7392f314330dd9eceadfc4ce9b82/scripts/daily-scrum/src/infrastructures/dailyScrumBurndownChartPresenter/index.test.ts#L1-L51] 와 같이 테스트를 구현했습니다.
