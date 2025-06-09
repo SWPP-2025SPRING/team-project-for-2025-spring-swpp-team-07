@@ -17,7 +17,7 @@ public class KartController : MonoBehaviour
     public List<ParticleSystem> primaryParticles = new List<ParticleSystem>();
     public List<ParticleSystem> secondaryParticles = new List<ParticleSystem>();
 
-    float speed, currentSpeed;
+    float currentSpeed;
     float rotate, currentRotate;
     int driftDirection;
     float driftPower;
@@ -297,6 +297,10 @@ public class KartController : MonoBehaviour
     public PlayerData GetPlayerData()
     {
         return this.playerData;
+    }
+
+    public float GetCurrentSpeed() {
+        return currentSpeed;
     }
 
     public float GetMaxSpeed() {
