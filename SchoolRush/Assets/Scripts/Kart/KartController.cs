@@ -299,10 +299,6 @@ public class KartController : MonoBehaviour
         return this.playerData;
     }
 
-    public float GetCurrentSpeed() {
-        return currentSpeed;
-    }
-
     public float GetMaxSpeed() {
         return maxSpeed;
     }
