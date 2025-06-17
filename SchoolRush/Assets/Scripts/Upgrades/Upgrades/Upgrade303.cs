@@ -13,6 +13,6 @@ public class Upgrade303 : Upgrade {
 
     public override void OnPick() {
         kartController.SetMaxSpeed(kartController.GetMaxSpeed() * rate);
-        kartController.SetDizzyTime();
+        kartController.IncrementDizzyTime(2f);
     }
 }

@@ -3,11 +3,9 @@ using UnityEngine;
 public class Upgrade302 : Upgrade {
     private KartController kartController;
     private static readonly float[] rates = { 1.2f, 1.6f, 2.0f };
-    private float selectedRate;
 
     public Upgrade302(KartController kartController): base("창업", GetDescription()) {
         this.kartController = kartController;
-        selectedRate = rates[Random.Range(0, rates.Length)];
     }
 
     private static string GetDescription() {
@@ -15,6 +13,6 @@ public class Upgrade302 : Upgrade {
     }
 
     public override void OnPick(){
-        kartController.SetMaxSpeed(kartController.GetMaxSpeed() * selectedRate);
+        kartController.SetMaxSpeed(kartController.GetMaxSpeed() * rates[Random.Range(0, rates.Length)]);
     }
 }

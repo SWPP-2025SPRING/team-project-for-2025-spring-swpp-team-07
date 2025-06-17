@@ -351,8 +351,8 @@ public class KartController : MonoBehaviour
         return shieldCount;
     }
 
-    public void SetDizzyTime() {
-        dizzyTime += 2f;
+    public void IncrementDizzyTime(float x) {
+        dizzyTime += x;
     }
 
     public void GetDizzy() {
