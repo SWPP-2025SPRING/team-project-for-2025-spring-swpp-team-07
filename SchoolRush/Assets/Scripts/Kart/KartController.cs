@@ -51,6 +51,8 @@ public class KartController : MonoBehaviour
     private bool first, second, third;
     private Color c;
 
+    private bool isOnGround = false;
+
     private PlayerData playerData;
     private int shieldCount = 0;
     #endregion
@@ -157,6 +159,12 @@ public class KartController : MonoBehaviour
 
             // End Drift
             if (Input.GetKeyUp(KeyCode.LeftShift)) Boost();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        {
+            sphere.velocity = new Vector3(sphere.velocity.x, 30f, sphere.velocity.z);
+            isOnGround = false;
         }
 
         currentRotate = Mathf.Lerp(currentRotate, rotate, Time.deltaTime * 4f);
@@ -389,6 +397,10 @@ public class KartController : MonoBehaviour
 
 
     #endregion
+
+    public void SetAsOnGround() {
+        isOnGround = true;
+    }
 }
 
 public enum ShieldResult {
