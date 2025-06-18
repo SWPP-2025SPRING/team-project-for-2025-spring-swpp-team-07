@@ -81,6 +81,7 @@ public class UpgradeManager : MonoBehaviour
                 Upgrade u403 = new Upgrade403();
                 Upgrade u404 = new Upgrade404();
                 upgrades.AddRange(new RandomPicker<Upgrade>(new List<Upgrade> { u401, u402, u403, u404 }).pick(3));
+                SetColleagueActive(3, true);
                 break;
         }
 
