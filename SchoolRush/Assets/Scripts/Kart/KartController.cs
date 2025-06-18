@@ -291,7 +291,7 @@ public class KartController : MonoBehaviour
         RaycastHit hitOn;
         RaycastHit hitNear;
 
-        Physics.Raycast(transform.position + (transform.up*.1f), Vector3.down, out hitOn, 1.1f,layerMask);
+        Physics.Raycast(transform.position + (transform.up*.1f), Vector3.down, out hitOn, 1.1f, layerMask);
         Physics.Raycast(transform.position + (transform.up * .1f), Vector3.down, out hitNear, 2.0f, layerMask);
 
         //Normal Rotation
