@@ -18,7 +18,6 @@ public class KartController : MonoBehaviour
     public Color[] turboColors;
 
     [Header("References")]
-    private CollisionManager collisionManager;
     private PostProcessVolume postVolume;
     private PostProcessProfile postProfile;
 
@@ -67,8 +66,7 @@ public class KartController : MonoBehaviour
 
     void Start()
     {
-        collisionManager = transform.parent.gameObject.GetComponentInChildren<CollisionManager>();
-        collisionManager.KCRegister(this);
+        transform.parent.gameObject.GetComponentInChildren<CollisionManager>().KCRegister(this);
 
         postVolume = Camera.main.GetComponent<PostProcessVolume>();
         postProfile = postVolume.profile;
