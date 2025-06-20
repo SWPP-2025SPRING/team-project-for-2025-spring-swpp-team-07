@@ -6,15 +6,19 @@ public class HelpManager : MonoBehaviour
 {
     public GameObject HelpImage;
 
-    // Start is called before the first frame update
     void Start()
+{
+    if (HelpImage != null)
     {
-        
+        HelpImage.SetActive(false);
     }
+}
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleImage()
     {
-        
+        if (HelpImage != null)
+        {
+            HelpImage.SetActive(!HelpImage.activeSelf);
+        }
     }
 }
