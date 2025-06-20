@@ -15,6 +15,8 @@ public class CheckpointIdentifier : MonoBehaviour {
     }
 
     void OnEnable(){
+        if (ID == 0) return;
+
         MMIndicator.SetCheckpoint(gameObject);
     }
 }
