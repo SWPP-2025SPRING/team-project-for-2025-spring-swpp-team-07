@@ -8,11 +8,11 @@ public class MMIndicator : MonoBehaviour
     public GameObject player;
     private GameObject checkpoint; 
 
-    private float amp = 1.5f;
+    private float amp = 2f;
     private float freq = 2f;
 
     private void Start() {
-        length = 8f;
+        length = 10f;
     }
 
     private void Update()
@@ -24,7 +24,7 @@ public class MMIndicator : MonoBehaviour
         transform.rotation = rotation * Quaternion.Euler(0, -90, 0);
 
         Vector3 pos = transform.position;
-        transform.position = new(pos.x, 30, pos.z);
+        transform.position = new(pos.x, player.transform.position.y + 30, pos.z);
     }
 
     public void SetCheckpoint(GameObject cp){
