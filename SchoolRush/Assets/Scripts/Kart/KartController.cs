@@ -34,6 +34,7 @@ public class KartController : MonoBehaviour
     private float firstDriftLimit = 50f;
     private float secondDriftLimit = 100f;
     private float thirdDriftLimit = 150f;
+    private Vector3 spherePivot = new Vector3(0, 0.4f, 0);
 
     [Header("States")]
     private List<ParticleSystem> primaryParticles = new List<ParticleSystem>();
@@ -83,6 +84,7 @@ public class KartController : MonoBehaviour
         StartCoroutine(Per10SecondsUpdate());
 
         taxi.gameObject.SetActive(false);
+        t_sphere.gameObject.SetActive(false);
     }
 
     private void CacheParticles()
@@ -117,7 +119,7 @@ public class KartController : MonoBehaviour
     void Update()
     {
         // Follow Collider
-        transform.position = sphere.transform.position - new Vector3(0, 0.4f, 0);
+        transform.position = sphere.transform.position - spherePivot;
 
         if (isDizzy) return;
         input = Input.GetAxis("Horizontal");
@@ -387,9 +389,15 @@ public class KartController : MonoBehaviour
         frontWheels.gameObject.SetActive(false);
         backWheels.gameObject.SetActive(false);
         steeringWheel.gameObject.SetActive(false);
+        sphere.gameObject.SetActive(false);
+
         taxi.gameObject.SetActive(true);
+        t_sphere.gameObject.SetActive(true);
         isTaxi = true;
+        t_sphere.transform.position = sphere.transform.position;
         sphere = t_sphere;
+        spherePivot = new Vector3(0, 1.8f, 0);
+        
         wheelParticles = t_wheelParticles;
         flashParticles = t_flashParticles;
         CacheParticles();
