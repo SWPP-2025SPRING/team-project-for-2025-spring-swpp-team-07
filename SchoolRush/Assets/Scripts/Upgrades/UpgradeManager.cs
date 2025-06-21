@@ -23,7 +23,7 @@ public class UpgradeManager : MonoBehaviour
         selectedUpgrades = new List<Upgrade>();
         colleagues = new List<Transform>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 1; i <= 3; i++)
             upgradeUIItems.Add(upgradeUI.transform.GetChild(i).gameObject);
 
         for (int i = 0; i < CharacterModels.childCount; i++)
@@ -86,9 +86,8 @@ public class UpgradeManager : MonoBehaviour
 
         foreach (var upgrade in upgrades) {
             int index = upgrades.IndexOf(upgrade);
-            upgradeUIItems[index].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = upgrade.GetTitle();
-            upgradeUIItems[index].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = upgrade.GetDescription();
-            upgradeUIItems[index].transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => PickComplete(upgrade));
+            upgradeUIItems[index].transform.GetChild(0).Find("Image").GetComponent<Image>().sprite = upgrade.GetAugment();
+            upgradeUIItems[index].transform.GetChild(1).gameObject.GetComponent<Button>().onClick.AddListener(() => PickComplete(upgrade));
             upgradeUIItems[index].SetActive(true);
         }
     }
