@@ -57,7 +57,6 @@ public class KartController : MonoBehaviour
     private int shieldCount = 0;
 
 
-    private bool isOnRoad = false;
     private float roadRemainTime = -1f;
     private float roadOnSetTime = 0.5f;
     private float roadSpeedMultiplier = 1.5f;
@@ -457,10 +456,6 @@ public class KartController : MonoBehaviour
         isOnGround = true;
     }
 
-    public void SetAsOnRoad(bool b)
-    {
-        isOnRoad = b;
-    }
 }
 
 public enum ShieldResult {
