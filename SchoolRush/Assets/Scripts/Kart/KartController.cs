@@ -25,8 +25,6 @@ public class KartController : MonoBehaviour
     [Header("Settings")]
     public LayerMask layerMask;
     private float maxSpeed = 50f;
-    private float roadMaxSpeed = 80f;
-    private float defaultMaxSpeed = 50f;
     private float acceleration = 30f;
     private float deceleration = 3f;
     private float steering = 10f;
@@ -61,9 +59,10 @@ public class KartController : MonoBehaviour
 
     private bool isOnRoad = false;
     private float roadRemainTime = -1f;
-    private float roadOnSetTime = 1f;
+    private float roadOnSetTime = 0.5f;
+    private float roadSpeedMultiplier = 1.5f;
 
-    
+
     #endregion
 
     #region Initialize - Awake & Start
@@ -127,12 +126,11 @@ public class KartController : MonoBehaviour
     #region Callbacks - Update
     void Update()
     {
-        
-        
-        maxSpeed = roadRemainTime <= 0 ? defaultMaxSpeed : roadMaxSpeed;
-        
+        roadRemainTime = isOnRoad ? roadOnSetTime : roadRemainTime;
+        float appliedMaxSpeed = roadRemainTime <= 0 ? maxSpeed:maxSpeed * roadSpeedMultiplier;
+
         roadRemainTime -= roadRemainTime>0 ? Time.deltaTime:0;
-        
+
         // Follow Collider
         transform.position = sphere.transform.position - new Vector3(0, 0.4f, 0);
 
@@ -142,7 +140,7 @@ public class KartController : MonoBehaviour
         // Accelerate
         if (Input.GetAxis("Vertical") > 0) currentSpeed += acceleration * Time.deltaTime;
         else currentSpeed = Mathf.Lerp(currentSpeed, 0, deceleration * Time.deltaTime);
-        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
+        currentSpeed = Mathf.Clamp(currentSpeed, 0, appliedMaxSpeed);
 
         // Steer
         if (input != 0)
@@ -438,7 +436,6 @@ public class KartController : MonoBehaviour
     public void SetAsOnRoad(bool b)
     {
         isOnRoad = b;
-        if (isOnRoad) roadRemainTime = roadOnSetTime;
     }
 }
 
