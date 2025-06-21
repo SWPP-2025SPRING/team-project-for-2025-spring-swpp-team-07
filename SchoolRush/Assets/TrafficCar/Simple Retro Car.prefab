@@ -173,9 +173,8 @@ MonoBehaviour:
   rearRightCollider: {fileID: 8370652610688431585}
   rearLeftCollider: {fileID: 8370652610461274126}
   nextCheckpoint: {fileID: 0}
-  checks:
-  - {fileID: 0}
-  CheckPointSearch: 1
+  checks: []
+  CheckPointSearch: 0
   objectDetected: 0
   isCarControlledByAI: 1
   seenLayers:
@@ -188,9 +187,9 @@ MonoBehaviour:
   despawnForFlippingOver: 1
   taxiMode: 0
   antiRollController: {fileID: 0}
-  limitSpeedWhenStabilizing: 1
+  limitSpeedWhenStabilizing: 0
   stabilizationSpeedLimit: 40
-  acceleration: 10000
+  acceleration: 20000
   breaking: 100000
 --- !u!1 &5451723997269261481
 GameObject:
