@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import type { UpgradeId } from "@/entities/upgrade";
-import { formatTimeMMSS } from "@/utils/time";
-import { memo, useReducer, useState } from "react";
-import map from "./map.png";
-import Image from "next/image";
+import { useInterval } from '@/app/utils/useInterval';
+import type { UpgradeId } from '@/entities/upgrade';
+import { formatTimeMMSS } from '@/utils/time';
+import Image from 'next/image';
+import { memo, useReducer } from 'react';
+import map from './map.png';
 
 export const Item = memo(
   ({
@@ -30,7 +31,7 @@ export const Item = memo(
           onClick={toggleDetails}
           tabIndex={0}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
+            if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
               toggleDetails();
             }
@@ -44,12 +45,10 @@ export const Item = memo(
               <div className="font-medium text-xl">{nickname}</div>
             </div>
             <div className="flex items-center space-x-4 pointer-events-none">
-              <div className="text-xl font-semibold">
-                {formatTimeMMSS(totalTime / 1000)}
-              </div>
+              <div className="text-xl font-semibold">{formatTimeMMSS(totalTime / 1000)}</div>
               <div className="w-6 h-6 flex items-center justify-center">
                 <svg
-                  className={`w-4 h-4 transform transition-transform duration-300 ${showDetails ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 transform transition-transform duration-300 ${showDetails ? 'rotate-180' : ''}`}
                   aria-hidden="true"
                   fill="none"
                   stroke="currentColor"
@@ -70,15 +69,13 @@ export const Item = memo(
         <div
           className={`overflow-hidden transition-all duration-500 grid sm:grid-cols-[1fr_360px] ease-in-out grid-cols-1 ${
             showDetails
-              ? "opacity-100 border-t border-opacity-100"
-              : "max-h-0 opacity-0 border-opacity-0 border-t"
+              ? 'opacity-100 border-t border-opacity-100'
+              : 'max-h-0 opacity-0 border-opacity-0 border-t'
           }`}
           aria-hidden={!showDetails}
         >
           <div className="px-4 py-3">
-            <h4 className="text-sm text-gray-500 mb-3 font-bold">
-              고른 증강 목록
-            </h4>
+            <h4 className="text-sm text-gray-500 mb-3 font-bold">고른 증강 목록</h4>
             <div className="flex flex-wrap gap-2">
               {upgradeIds.map((id) => (
                 <button
@@ -112,6 +109,12 @@ const MovePath = ({
 }: {
   logs: { time: number; position: { x: number; y: number } }[];
 }) => {
+  const [sliceIndex, increment] = useReducer((c) => c + 1, 0);
+
+  useInterval(() => {
+    if (sliceIndex < log.length) increment();
+  }, 50);
+
   // Normalize positions for the path visualization
   const normalizedLog = (() => {
     const minX = -1480;
@@ -121,16 +124,18 @@ const MovePath = ({
     const scale = 0.115;
 
     // Normalize positions
-    return log.map((entry) => ({
-      ...entry,
-      normalizedX: (entry.position.x - minX) * scale,
-      normalizedY: height - (entry.position.y - minY) * scale,
-    }));
+    return log
+      .map((entry) => ({
+        ...entry,
+        normalizedX: (entry.position.x - minX) * scale,
+        normalizedY: height - (entry.position.y - minY) * scale,
+      }))
+      .slice(0, sliceIndex);
   })();
 
   // Generate SVG path
   const pathData = (() => {
-    if (normalizedLog.length === 0) return "";
+    if (normalizedLog.length === 0) return '';
 
     const firstPoint = normalizedLog[0];
     const restPoints = normalizedLog.slice(1);
@@ -138,7 +143,7 @@ const MovePath = ({
     const moveTo = `M ${firstPoint.normalizedX},${firstPoint.normalizedY}`;
     const lineTo = restPoints
       .map((point) => `L ${point.normalizedX},${point.normalizedY}`)
-      .join(" ");
+      .join(' ');
 
     return `${moveTo} ${lineTo}`;
   })();
@@ -147,11 +152,7 @@ const MovePath = ({
     <div className="relative w-[300px] h-[689px] mx-auto">
       <Image width={300} src={map} alt="" className="absolute top-0 left-0" />
       <div className="z-20 absolute inset-0">
-        <svg
-          width="300"
-          viewBox="0 0 300 689"
-          preserveAspectRatio="xMidYMid meet"
-        >
+        <svg width="300" viewBox="0 0 300 689" preserveAspectRatio="xMidYMid meet">
           <title>map</title>
           <path
             d={pathData}
