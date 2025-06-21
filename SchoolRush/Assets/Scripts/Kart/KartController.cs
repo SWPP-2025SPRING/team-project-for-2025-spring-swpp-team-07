@@ -62,8 +62,6 @@ public class KartController : MonoBehaviour
     private float roadOnSetTime = 0.5f;
     private float roadSpeedMultiplier = 1.5f;
 
-    private float appliedMaxSpeed = 0f;
-
     #endregion
 
     #region Initialize - Awake & Start
