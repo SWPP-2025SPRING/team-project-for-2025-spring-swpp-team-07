@@ -7,12 +7,12 @@ public class HelpManager : MonoBehaviour
     public GameObject HelpImage;
 
     void Start()
-{
-    if (HelpImage != null)
     {
-        HelpImage.SetActive(false);
+        if (HelpImage != null)
+        {
+            HelpImage.SetActive(false);
+        }
     }
-}
 
     public void ToggleImage()
     {
