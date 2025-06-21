@@ -5,7 +5,7 @@ namespace Peque.Traffic
 {
     public class CharacterNavigationController : WaypointNavigator
     {
-        private float enableDistance = 100.0f;
+        private float enableDistance = 50.0f;
         public Transform kartPos;
 
         public float movementSpeed = 1f;
@@ -39,7 +39,7 @@ namespace Peque.Traffic
             enabled = false;
         }
 
-        
+
 
         private void OnEnable()
         {
