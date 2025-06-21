@@ -18,6 +18,9 @@ public class KartController : MonoBehaviour
     public Transform t_wheelParticles, t_flashParticles;
     public Color[] turboColors;
 
+    public CinemachineVirtualCamera virtualCamera;
+    private Cinemachine3rdPersonFollow thirdPersonFollow;
+
     [Header("References")]
     private PostProcessVolume postVolume;
     private PostProcessProfile postProfile;
@@ -32,8 +35,8 @@ public class KartController : MonoBehaviour
     private float boostDuration = 0.3f;
     private float dizzyDuration = 1.5f;
     private float firstDriftLimit = 50f;
-    private float secondDriftLimit = 100f;
-    private float thirdDriftLimit = 150f;
+    private float secondDriftLimit = 80f;
+    private float thirdDriftLimit = 110f;
     private Vector3 spherePivot = new Vector3(0, 0.27f, 0);
 
     [Header("States")]
@@ -56,12 +59,11 @@ public class KartController : MonoBehaviour
 
     private PlayerData playerData;
     private int shieldCount = 0;
-
+    private int nextCheckpointID = 1;          // 다음 목표 checkpoint id
 
     private float roadRemainTime = -1f;
     private float roadOnSetTime = 0.5f;
     private float roadSpeedMultiplier = 1.5f;
-
 
     #endregion
 
@@ -76,14 +78,12 @@ public class KartController : MonoBehaviour
         steeringWheel = kartModel.Find("head");
 
         taxi = kartNormal.Find("Taxi");
+
+        thirdPersonFollow = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
     }
-
-
 
     void Start()
     {
-        transform.parent.gameObject.GetComponentInChildren<CollisionManager>().KCRegister(this);
-
         postVolume = Camera.main.GetComponent<PostProcessVolume>();
         postProfile = postVolume.profile;
 
@@ -449,8 +449,10 @@ public class KartController : MonoBehaviour
         isTaxi = true;
         t_sphere.transform.position = sphere.transform.position;
         sphere = t_sphere;
-        spherePivot = new Vector3(0, 1.8f, 0);
-        
+        spherePivot = new Vector3(0, 2.1f, 0);
+
+        thirdPersonFollow.ShoulderOffset = new Vector3(0f, 2.5f, -10f);
+
         wheelParticles = t_wheelParticles;
         flashParticles = t_flashParticles;
         CacheParticles();
@@ -464,6 +466,14 @@ public class KartController : MonoBehaviour
         isOnGround = true;
     }
 
+    public int GetNextCheckpointID() {
+        return nextCheckpointID;
+    }
+
+    public void IncrementNextCheckpointID() {
+        Debug.Log($"Incrementing next checkpoint ID, {nextCheckpointID}");
+        nextCheckpointID++;
+    }
 }
 
 public enum ShieldResult {

@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace Peque.Traffic
 {
     public class CharacterNavigationController : WaypointNavigator
     {
+        private float enableDistance = 50.0f;
+        public Transform kartPos;
+
         public float movementSpeed = 1f;
         public float rotationSpeed = 4f;
         public float raycastHeight = 50f;
@@ -13,7 +17,31 @@ namespace Peque.Traffic
         private Rigidbody rb;
         private WaypointNavigator navigator;
 
+        IEnumerator CheckProximity()
+        {
+            while (true)
+            {
+                float dist = Vector3.Distance(kartPos.position, transform.position);
+                if (dist <= enableDistance)
+                {
+                    enabled = true;
+                    yield break;
+                }
+                // 3초마다 한 번씩만 검사
+                yield return new WaitForSeconds(2f);
+            }
+        }
+
         private void Awake()
+        {
+            StartCoroutine(CheckProximity());
+
+            enabled = false;
+        }
+
+
+
+        private void OnEnable()
         {
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
@@ -27,11 +55,11 @@ namespace Peque.Traffic
             if (reachedDestination)
             {
                 navigator.getNextWaypoint();
-                if (reachedDestination)
-                {
-                    animator.SetFloat("Speed", 0);
-                    return;
-                }
+                // if (reachedDestination)
+                // {
+                //     animator.SetFloat("Speed", 0);
+                //     return;
+                // }
             }
         }
 
@@ -40,11 +68,11 @@ namespace Peque.Traffic
             // 1) 수평 방향만 계산
             Vector3 dir = destination - rb.position;
             Vector3 flatDir = new Vector3(dir.x, 0, dir.z);
-            if (flatDir.sqrMagnitude < 0.01f)
-            {
-                animator.SetFloat("Speed", 0);
-                return;
-            }
+            // if (flatDir.sqrMagnitude < 0.01f)
+            // {
+            //     animator.SetFloat("Speed", 0);
+            //     return;
+            // }
 
             // 2) 애니메이터 속도 세팅
             // animator.SetFloat("Speed", movementSpeed);
