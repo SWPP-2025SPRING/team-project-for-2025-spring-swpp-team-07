@@ -12,7 +12,7 @@ public class CheckpointManager : MonoBehaviour
     [Header("ID 순서대로 0~6 체크포인트 오브젝트를 넣어주세요")]
 
     public GameObject[] checkpoints;           // 0→ID=0(시작지점), … , 6→ID=6(도착지점)
-    private int nextCheckpointID = 0;          // 지금까지 통과한 마지막 cp ID (0=start)
+    public int nextCheckpointID = 0;          // 지금까지 통과한 마지막 cp ID (0=start)
 
     void Start() {
         for (int i = 0; i < checkpoints.Length; i++)
