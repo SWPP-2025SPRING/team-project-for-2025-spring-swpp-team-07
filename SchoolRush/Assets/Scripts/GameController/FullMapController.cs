@@ -7,8 +7,8 @@ public class FullMapController : MonoBehaviour
     private Camera cam;
     private Vector3 pos0 = new(0, 3829, -454);
     private const float fov0 = 80f;
-    private const float fovSpeed = 20f;
-    private const float moveSpeed = 20f;
+    private const float fovSpeed = 40f;
+    private const float moveSpeed = 60f;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class FullMapController : MonoBehaviour
     {
         if (!cam.isActiveAndEnabled) return;
 
-        bool expand = Input.GetKey(KeyCode.Plus) || Input.GetKey(KeyCode.KeypadPlus);
+        bool expand = Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.Plus) || Input.GetKey(KeyCode.KeypadPlus);
         bool shrink = Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus);
 
         if (expand ^ shrink)
