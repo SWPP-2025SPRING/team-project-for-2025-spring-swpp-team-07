@@ -91,6 +91,7 @@ public class KartController : MonoBehaviour
 
         playerData = new PlayerData(SaveNickname.LoadNickname());
         StartCoroutine(Per10SecondsUpdate());
+        StartCoroutine(CheckTagBelow());
 
         taxi.gameObject.SetActive(false);
     }
@@ -121,12 +122,35 @@ public class KartController : MonoBehaviour
             yield return new WaitForSeconds(10f);
         }
     }
+
+
+    IEnumerator CheckTagBelow()
+    {
+        while (true)
+        {
+            RaycastHit hit;
+            Vector3 origin = transform.position;
+            Vector3 direction = Vector3.down;
+
+            if (Physics.Raycast(origin, direction, out hit, 5f))
+            {
+                if (hit.collider.CompareTag("Road"))
+                {
+                    roadRemainTime = roadOnSetTime;
+                }
+            }
+
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
     #endregion
+
+
 
     #region Callbacks - Update
     void Update()
     {
-        roadRemainTime = isOnRoad ? roadOnSetTime : roadRemainTime;
         float appliedMaxSpeed = roadRemainTime <= 0 ? maxSpeed:maxSpeed * roadSpeedMultiplier;
 
         roadRemainTime -= roadRemainTime>0 ? Time.deltaTime:0;
