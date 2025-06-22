@@ -221,7 +221,7 @@ MonoBehaviour:
   antiRollController: {fileID: 0}
   limitSpeedWhenStabilizing: 0
   stabilizationSpeedLimit: 50
-  acceleration: 20000
+  acceleration: 100000
   breaking: 100000
 --- !u!1 &5524454792884461113
 GameObject:
