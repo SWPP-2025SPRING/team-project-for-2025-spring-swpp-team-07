@@ -70,15 +70,14 @@ public class HUDController : MonoBehaviour
 
         // update status
         Color32 offColor = new Color32(0x50, 0x50, 0x50, 0xff);
-        if (kartController.GetCanJump()){
-            jump.color = Color.white;
-        } else jump.color = offColor;
-        if (kartController.GetCanBoost()) {
-            boost.color = Color.white;
-        } else boost.color = offColor;
-        if (kartController.GetIsDrifting()) {
-            drifting.color = Color.white;
-        } else drifting.color = offColor;
+        if (kartController.GetCanJump()) jump.color = Color.white;
+        else jump.color = offColor;
+        
+        if (kartController.GetCanBoost()) boost.color = Color.white;
+        else boost.color = offColor;
+        
+        if (kartController.GetIsDrifting()) drifting.color = Color.white;
+        else drifting.color = offColor;
 
     }
 
