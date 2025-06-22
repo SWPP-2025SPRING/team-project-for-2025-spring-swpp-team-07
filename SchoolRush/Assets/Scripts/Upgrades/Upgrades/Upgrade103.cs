@@ -1,13 +1,13 @@
 public class Upgrade103 : Upgrade {
 
-    private SpawnerController sc;
+    private PassengerController pc;
 
-    public Upgrade103(SpawnerController sc): base(103, "통행 금지령") {
-        this.sc = sc;
+    public Upgrade103(PassengerController pc): base(103, "통행 금지령") {
+        this.pc = pc;
     }
 
     public override void OnPick()
     {
-        sc.StopSpawn();
+        pc.StopSpawnAndDestroyAll();
     }
 }

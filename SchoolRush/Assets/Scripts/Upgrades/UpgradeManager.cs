@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
     public KartController kartController;
     public Transform CharacterModels;
     public BGMController bgmController;
-    public SpawnerController spawnerController;
+    public PassengerController passengerController;
 
     [SerializeField]
     private GameObject upgradeUI;
@@ -56,7 +56,7 @@ public class UpgradeManager : MonoBehaviour
             case 1:
                 Upgrade u101 = new Upgrade101(kartController);
                 Upgrade u102 = new Upgrade102(kartController);
-                Upgrade u103 = new Upgrade103(spawnerController);
+                Upgrade u103 = new Upgrade103(passengerController);
                 Upgrade u104 = new Upgrade104();
                 Upgrade u105 = new Upgrade105(kartController);
                 upgrades.Add(u101);
