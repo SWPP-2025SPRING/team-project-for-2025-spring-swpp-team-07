@@ -1,5 +1,13 @@
 public class Upgrade103 : Upgrade {
-    public Upgrade103(): base(103, "통행 금지령") {
 
+    private SpawnerController sc;
+
+    public Upgrade103(SpawnerController sc): base(103, "통행 금지령") {
+        this.sc = sc;
+    }
+
+    public override void OnPick()
+    {
+        sc.StopSpawn();
     }
 }
