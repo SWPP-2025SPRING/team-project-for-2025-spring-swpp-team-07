@@ -1481,7 +1481,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   kmh: 0
   speedLimit: 80
-  distanceFromObjects: 2
+  distanceFromObjects: 0
   recklessnessThreshold: 0
   despawnForFlippingOver: 1
   taxiMode: 0
