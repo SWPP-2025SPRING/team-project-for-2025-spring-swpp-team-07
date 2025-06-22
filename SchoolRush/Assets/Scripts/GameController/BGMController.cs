@@ -5,6 +5,7 @@ using UnityEngine;
 public class BGMController : MonoBehaviour
 {
     public List<AudioClip> racingBGMs;
+    public AudioClip gameClearBGM;
     public AudioClip aegukgaBGM;
 
     private AudioSource audioSource;
@@ -41,7 +42,7 @@ public class BGMController : MonoBehaviour
         }
     }
 
-    private void ChangeBGM(int index = -1)
+    public void ChangeBGM(int index = -1)
     {
 
         if (index < 0 || index >= racingBGMs.Count)
@@ -58,5 +59,14 @@ public class BGMController : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = racingBGMs[index];
         audioSource.Play();
+    }
+
+    public void PlayGameClearBGM()
+    {
+        audioSource.Stop();
+        audioSource.clip = gameClearBGM;
+        audioSource.Play();
+
+        StopAllCoroutines();
     }
 }

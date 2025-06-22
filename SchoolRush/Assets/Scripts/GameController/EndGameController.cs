@@ -8,6 +8,8 @@ public class EndGameController : MonoBehaviour
     public GameObject finalPanel;
     public TextMeshProUGUI finalTimeText;
 
+    [SerializeField]
+    private BGMController bgmController;
     private HUDController hud;
     private bool hasEnded = false;
 
@@ -29,6 +31,8 @@ public class EndGameController : MonoBehaviour
 
     private void EndGame()
     {
+        bgmController.PlayGameClearBGM();
+
         hasEnded = true;
         Time.timeScale = 0f;
 
