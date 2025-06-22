@@ -39,6 +39,19 @@ namespace SchoolRush.Assets.Scripts.Utils.Tests
         }
 
         [Test]
+        public void Pick_ShouldIncluded()
+        {
+            // Arrange
+            var items = new List<int> { 1, 2, 3, 4, 5 };
+            var picker = new RandomPicker<int>(items);
+
+            var result = picker.pick(3);
+            foreach (var item in result) {
+                Assert.That(items.Contains(item), Is.True, $"Item {item} is not in the original list.");
+            }
+        }
+
+        [Test]
         public void Pick_ShouldUniform()
         {
             // Arrange
