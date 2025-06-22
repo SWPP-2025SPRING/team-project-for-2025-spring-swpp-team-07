@@ -336,7 +336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4300523931528132701}
   m_LocalRotation: {x: -0.12712236, y: -0.5584312, z: -0.087091066, w: 0.8151133}
-  m_LocalPosition: {x: 0, y: 0.379, z: 2.947}
+  m_LocalPosition: {x: -0.027, y: 0.483, z: 2.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 855664346247000626}
   m_Layer: 0
   m_Name: 'Samurai_White_A '
-  m_TagString: Untagged
+  m_TagString: Traffic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
