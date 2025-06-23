@@ -7,10 +7,10 @@ public class AggressiveCarAI : MonoBehaviour
     
     [Header("Aggressive Behavior")]
     [Tooltip("Charge speed (km/h)")]
-    public int chargeSpeed = 200;
+    public int chargeSpeed = 100;
     
     [Tooltip("Maximum distance to continue chasing if target is lost")]
-    public float maxChaseDistance = 300f;
+    public float maxChaseDistance = 500f;
     
     [Tooltip("Rotation speed toward target")]
     public float turnSpeed = 2f;
@@ -22,7 +22,7 @@ public class AggressiveCarAI : MonoBehaviour
     public float switchToRealTargetTime = 0.5f;
     
     [Tooltip("Direct force for acceleration")]
-    public float accelerationForce = 50000f;
+    public float accelerationForce = 30000f;
     
     [Header("Detection")]
     [Tooltip("Obstacle detection distance")]
