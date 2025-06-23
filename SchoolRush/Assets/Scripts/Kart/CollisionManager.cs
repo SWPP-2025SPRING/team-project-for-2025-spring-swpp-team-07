@@ -18,8 +18,8 @@ public class CollisionManager : MonoBehaviour
     private void Update()
     {
         // 개발용 치트키: checkpoint 로 순간이동
-        //#if UNITY_EDITOR
-        //if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+        #if UNITY_EDITOR
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
         {
             for (int i = 0; i <= 6; i++)
             {
@@ -31,7 +31,7 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
-        //#endif
+        #endif
     }
 
     private void OnCollisionEnter(Collision collision)
