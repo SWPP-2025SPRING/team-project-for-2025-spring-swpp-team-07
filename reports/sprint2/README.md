@@ -118,7 +118,7 @@ Sprint 2 기간인 5/12부터 5/25까지의 커밋 내역은 아래 링크에서
 | `미니맵 초안 구현` 태스크 | 장호림 | 우현민 | 05-12 | 20:35-21:05 | [GitHub PR](https://github.com/SWPP-2025SPRING/team-project-for-2025-spring-swpp-team-07/pull/47) | [Slack Image](https://2025springswppimo.slack.com/files/U08HG6Q15NK/F08S01REZUJ/img_1124.jpg)
 | `주변 차량 행동 및 충돌 시 로직 구현` 태스크 사전작업 | 우현민 | 문지환 | 05-19 | 18:40-19:41 | [GitHub PR](https://github.com/SWPP-2025SPRING/team-project-for-2025-spring-swpp-team-07/pull/54) | [Slack Image](https://2025springswppimo.slack.com/files/U08HG6Q15NK/F08SR38S72P/img_1142.jpg) |
 | `특수 효과 BGM 제작 및 적용` 태스크 중 사운드 리서치 작업 | 장호림 | 곽승연 | 05-19 | 19:00-19:40 | [GitHub PR](https://github.com/SWPP-2025SPRING/team-project-for-2025-spring-swpp-team-07/pull/52) | [Slack Image](https://2025springswppimo.slack.com/files/U08HG6Q15NK/F08SR47UGE7/kakaotalk_20250519_201636283.jpg) |
-| `주인공 에셋 1차 제작 및 적용` 태스크 | 곽승연 | 장호림 | 05-19 | 19:40-20:20 | [Slack File](https://2025springswppimo.slack.com/archives/C08KVGJU4H4/p1747653627335159?thread_ts=1747651245.296919&cid=C08KVGJU4H4) | [Slack Image](https://2025springswppimo.slack.com/files/U08HG6Q15NK/F08SR47UGE7/kakaotalk_20250519_201636283.jpg)
+| `주인공 에셋 1차 제작 및 적용` 태스크 | 곽승연 | 장호림 | 05-19 | 19:40-20:20 | [Slack File](https://2025springswppimo.slack.com/archives/C08KVGJU4H4/p1747653627335159?thread_ts=1747651245.296919&cid=C08KVGJU4H4) | [Slack Image](https://2025springswppimo.slack.com/files/U08HG6Q15NK/F08SR47UGE7/kakaotalk_20250519_201636283.jpg) |
 
 # Sprint 2 회고 회의 보고서
 
